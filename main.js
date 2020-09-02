@@ -69,10 +69,8 @@ function multiply(x,y) {
     tempOne = tempTwo;
     tempTwo = temp;
   }
-  var stringSmaller = "";
-  var stringLarger = "";
-  stringSmaller += tempTwo;
-  stringLarger += tempOne;
+  var stringSmaller = tempTwo;
+  var stringLarger = tempOne;
   //console.log(stringSmaller);
   //console.log(stringLarger);
   if(parseInt(stringSmaller) > (9007199254740991 / 9)) {
@@ -98,4 +96,53 @@ function multiply(x,y) {
   return stringAnswer;
 }
 
-var t = multiply("2461547057037816543224615470570", "75644711762");
+function divide(x,y) {
+  var stringOne = "";
+  var stringTwo = "";
+  var stringAnswer = "";
+  var remainder = "";
+  stringOne += x;
+  stringTwo += y;
+  if(parseInt(stringTwo) > parseInt(stringOne)) {
+    var temp = stringOne;
+    stringOne = stringTwo;
+    stringTwo = temp;
+  }
+  if(parseInt(stringTwo) > (9007199254740991 / 9)) {
+    console.log("Sorry, your numbers are too big...");
+    return 0;
+  }
+  var divisor = "";
+  var index = 0;
+  while(divisor < parseInt(stringTwo)) {
+    divisor += stringOne[index];
+    index++;
+  }
+  var multiplier = 0;
+  for(var i = index; i <= stringOne.length; i++) {
+    for(var j = 0; j <= 10; j++) {
+      if(parseInt(stringTwo) * j > divisor) {
+        stringAnswer += (j-1).toString();
+        divisor = subtract(divisor, (parseInt(stringTwo) * (j-1)).toString());
+        break;
+      }
+    }
+    index = i;
+    if(i != stringOne.length) {
+      divisor += stringOne[index];
+    }
+  }
+  var answers = [];
+  if(divisor == "") {
+    divisor = "0";
+  }
+  remainder = divisor;
+  answers[0] = stringAnswer;
+  answers[1] = remainder;
+  console.log(stringOne + " divided by " + stringTwo + " is:");
+  console.log(stringAnswer + " remainder " + remainder);
+  return answers;
+}
+
+var d = divide("123409804295843545430958354", "223435080542098");
+
