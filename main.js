@@ -1,28 +1,35 @@
-function lcg(a,c,m,seed,iter) {
-  var s = seed;
-  for(var i = 0; i < iter; i++) {
-    s = ((a * s + c) % m);
+function add(x,y) {
+  if(parseInt(y) > parseInt(x)) {
+    var temp = x;
+    x = y;
+    y = temp;
   }
-  return s;
+  var stringOne = x;
+  var stringTwo = y;
+  var stringAnswer = "";
+  for(var i = 0; i < stringOne.length + stringTwo.length; i++) { 
+    stringAnswer += "0";
+  }
+  stringAnswer += x;
+  console.log(stringTwo);
+  console.log(stringAnswer);
+  stringAnswer = (stringAnswer.split("")).reverse();
+  stringTwo = (stringTwo.split("").reverse());
+  for(i = 0; i < stringTwo.length; i++) {
+    var tempOne = parseInt(stringAnswer[i]);
+    var tempTwo = parseInt(stringTwo[i]);
+    var answer = tempOne + tempTwo;
+    if(answer >= 10) {
+      var remainder = answer % 10;
+      stringAnswer[i] = remainder;
+      stringAnswer[i+1] = (parseInt(stringAnswer[i+1])+1).toString();
+    } else {
+      stringAnswer[i] = answer;
+    }
+  }
+  stringAnswer = stringAnswer.reverse().join("");
+  stringAnswer = stringAnswer.replace(/^0+/, '');
+  console.log(stringAnswer);
 }
 
-function forwardlcg(seed,iter) {
-  var multiplier = 25214903917;
-  var increment = 11;
-  var period = Math.pow(2,48);
-  return lcg(multiplier,increment,period,seed,iter);
-}
-
-function reverselcg(seed,iter) {
-  var multiplier = 246154705703781;
-  var increment = 107048004364969;
-  var period = Math.pow(2,48);
-  return lcg(multiplier,increment,period,seed,iter);
-}
-
-function run() {
-  console.log(forwardlcg(3,1));
-  console.log(reverselcg(75644711762,1));
-}
-
-run();
+add("18620301761929499102937091","281474976710656");
