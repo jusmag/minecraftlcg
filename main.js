@@ -139,10 +139,52 @@ function divide(x,y) {
   remainder = divisor;
   answers[0] = stringAnswer;
   answers[1] = remainder;
-  console.log(stringOne + " divided by " + stringTwo + " is:");
-  console.log(stringAnswer + " remainder " + remainder);
+  //console.log(stringOne + " divided by " + stringTwo + " is:");
+  //console.log(stringAnswer + " remainder " + remainder);
   return answers;
 }
 
-var d = divide("123409804295843545430958354", "223435080542098");
+function convToBin(num) {
+  var number = parseInt(num);
+  var stringAnswer = "";
+  var answer = "";
+  var array = [];
+  answer = number.toString();
+  while(answer > 1) {
+    array = divide(answer, "2");
+    stringAnswer += array[1];
+    answer = array[0];
+  }
+  stringAnswer += answer;
+  stringAnswer = stringAnswer.split("").reverse().join("");
+  return stringAnswer;
+}
 
+function exponent(base, power) {
+  var result = "1";
+  for(var i = 0; i < power; i++) {
+    result = multiply(result, base);
+  }
+  return result;
+}
+
+function convToDec(bin) {
+  var array = bin.split("").reverse();
+  var answer = "0";
+  var base = "1";
+  for(var i = 0; i < array.length; i++) {
+    answer = add(answer, multiply(base, array[i]));
+    base = multiply(base, "2");
+  }
+  return answer;
+}
+
+function moduloTwo(base, bits){
+  var bin = convToBin(base);
+  var answer = [];
+  bin = bin.split("").reverse();
+  answer = bin.slice(0,bits-1);
+  answer = answer.reverse().join("");
+  console.log(answer);
+  return answer;
+}
